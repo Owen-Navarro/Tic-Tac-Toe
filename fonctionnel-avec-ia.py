@@ -1,5 +1,3 @@
-import math
-
 width = 5
 board = [" "," "," ",
          " "," "," ",
@@ -25,7 +23,7 @@ def verifier_victoire(signe):
             return True
     return False
 
-# Algorithme Minimax
+# Algorithme Minimax sans import de math
 def minimax(board, profondeur, is_maximizing, signe_ia, signe_joueur):
     if verifier_victoire(signe_ia):
         return 1
@@ -35,7 +33,7 @@ def minimax(board, profondeur, is_maximizing, signe_ia, signe_joueur):
         return 0
 
     if is_maximizing:
-        meilleur_score = -math.inf
+        meilleur_score = -float('inf')
         for i in range(9):
             if board[i] == " ":
                 board[i] = signe_ia
@@ -44,7 +42,7 @@ def minimax(board, profondeur, is_maximizing, signe_ia, signe_joueur):
                 meilleur_score = max(score, meilleur_score)
         return meilleur_score
     else:
-        meilleur_score = math.inf
+        meilleur_score = float('inf')
         for i in range(9):
             if board[i] == " ":
                 board[i] = signe_joueur
@@ -54,7 +52,7 @@ def minimax(board, profondeur, is_maximizing, signe_ia, signe_joueur):
         return meilleur_score
 
 def meilleur_coup(board, signe_ia, signe_joueur):
-    meilleur_score = -math.inf
+    meilleur_score = -float('inf')
     coup = None
     for i in range(9):
         if board[i] == " ":
@@ -69,7 +67,6 @@ def meilleur_coup(board, signe_ia, signe_joueur):
 def ia_avec_minimax(board, signe_ia, signe_joueur):
     coup = meilleur_coup(board, signe_ia, signe_joueur)
     board[coup] = signe_ia
-    afficher_plateau()
     if verifier_victoire(signe_ia):
         return(f"L'IA a gagné!")
     if " " not in board:
@@ -102,6 +99,7 @@ if jeux == 0:
             print(f"{joueur2} joue...")
             result = ia_avec_minimax(board, signe_ia, signe_joueur)
             if result:
+                afficher_plateau()
                 print(result)
                 break
         
@@ -119,12 +117,12 @@ if jeux == 0:
 elif jeux == 1:
     joueur1 = input("Choisi un pseudo banger pour le joueur 1 : ")
     joueur2 = input("Choisi un pseudo rocambolesque pour le joueur 2 : ")
-    signe_joueur1 = input(f"{joueur1}, choisi ton signe (X ou O) : ").lower()
+    signe_joueur1 = input(f"{joueur1}, choisis ton signe (X ou O) : ").lower()
     if signe_joueur1 =="o":
         signe_joueur2 ='x'
     elif signe_joueur1 == "x":
         signe_joueur2 = 'o'
-    
+
     tour = 0
     while True:
         afficher_plateau()
@@ -146,6 +144,7 @@ elif jeux == 1:
             afficher_plateau()
             print(f"{joueur} a gagné!")
             break
+
         if " " not in board:
             afficher_plateau()
             print("Match nul!")
