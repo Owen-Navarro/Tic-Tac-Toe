@@ -1,4 +1,4 @@
-import tkinter as tk
+import random
 width = 5
 board = [" "," "," ",
          " "," "," ",
@@ -39,7 +39,11 @@ if jeux == 0 :
             elif signe == "o":
                 signe ="x"
 
-            case = int(input(f"{joueur} choisi la case (1-9) : ")) - 1 
+            if joueur == joueur1:
+                case = int(input(f"{joueur} choisi la case (1-9) : ")) - 1
+            else:
+                case = random.choice([i for i in range(9) if board[i] == " "])
+                print(f"{joueur2} a choisi la case {case + 1}") 
             
             if 0 <= case <= 8 and board[case] == " ":
                 board[case] = signe
