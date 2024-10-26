@@ -78,8 +78,8 @@ if game == 0:
     difficulty = int(input("Choisir la difficulté facile (0) ou difficile (1) : "))
     player1 = input("Choisi un pseudo banger pour le joueur: ")
     player2 = "L'IA"
-    player_sign = input("Choisi ton signe (X ou O) : ").lower()
-    ia_sign = 'o' if player_sign == "x" else 'x'
+    ia_sign = input("Choisi le signe de l'IA (X ou O) : ").lower()
+    player_sign = 'o' if ia_sign == "x" else 'x'
 
     round = 0
     while True:
